@@ -1,6 +1,17 @@
-FROM postgres:12.16-alpine3.18
+FROM xfan1024/openeuler:23.03-light
 
-RUN apk --no-cache add tzdata dos2unix
+RUN mkdir /tools
+WORKDIR /tools
+
+RUN yum -y install wget make gcc readline-devel zlib-devel util-linux tzdata dos2unix
+
+RUN wget https://ftp.postgresql.org/pub/source/v12.16/postgresql-12.16.tar.gz
+RUN tar -xvf postgresql-12.16.tar.gz
+
+WORKDIR /tools/postgresql-12.16
+RUN ./configure --prefix=/usr/local/postgresql\
+    && make -j16\
+    && make install
 
 ENV TZ=Asia/Shanghai
 
