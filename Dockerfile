@@ -1,6 +1,9 @@
-FROM postgres:12.16-alpine3.18
+FROM xfan1024/openeuler:23.03-light
+RUN mkdir /tools
+WORKDIR /tools
 
-RUN apk --no-cache add tzdata dos2unix
+# 安装依赖
+RUN yum -y install util-linux  dos2unix
 
 ENV TZ=Asia/Shanghai
 
@@ -13,3 +16,13 @@ RUN dos2unix -k /usr/local/bin/update-pg-password.sh /usr/local/bin/docker-entry
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 RUN chmod +x /usr/local/bin/update-pg-password.sh
 RUN chmod +x /docker-entrypoint-initdb.d/10_eulixspace.sh
+
+
+RUN yum -y install postgresql postgresql-server \
+    &&mkdir /data\
+    &&chown -R postgres /data\
+    &&chown -R postgres /tools
+
+USER postgres
+RUN  initdb -D /data \
+    &&pg_ctl -D /data/ -l /data/logfile start
