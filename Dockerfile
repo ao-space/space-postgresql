@@ -16,13 +16,13 @@ RUN ./configure --prefix=/usr/local/postgresql\
 # 创建postgres用户和数据目录
 RUN useradd postgres\
     && mkdir /usr/local/postgresql/data\
-    && chown -R postgres /usr/local/postgresql
+    && chown -R postgres /usr/local/postgresql\
+    && chown -R postgres /tools
+
 # 初始化数据库并启动PostgreSQL服务
 USER postgres
 RUN /usr/local/postgresql/bin/initdb -D /usr/local/postgresql/data\
-    && /usr/local/postgresql/bin/pg_ctl -D /usr/local/postgresql/data start\
-    && /usr/local/postgresql/bin/createdb test\
-    && /usr/local/postgresql/bin/psql test
+    && /usr/local/postgresql/bin/pg_ctl -D /usr/local/postgresql/data start
 
 ENV TZ=Asia/Shanghai
 
