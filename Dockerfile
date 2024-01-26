@@ -3,8 +3,13 @@ RUN mkdir /tools
 WORKDIR /tools
 
 # 安装依赖
-RUN yum -y install util-linux  dos2unix
-
+RUN yum -y install util-linux  dos2unix gcc make unzip wget
+RUN wget https://github.com/ncopa/su-exec/archive/master.zip\
+    && unzip su-exec-master.zip\
+    && cd su-exec-master\
+    && make\
+    && cp su-exec /usr/local/bin/
+       
 RUN yum -y install postgresql postgresql-server \
     &&mkdir /data\
     &&chown -R postgres /data\
