@@ -9,7 +9,7 @@ RUN yum -y install util-linux  dos2unix gcc make unzip wget\
     && cd su-exec-master\
     && make\
     && cp su-exec /usr/local/bin/
-       
+  
 RUN yum -y install postgresql postgresql-server \
     &&mkdir /data\
     &&chown -R postgres /data\
@@ -35,3 +35,4 @@ STOPSIGNAL SIGINT
 
 EXPOSE 5432
 CMD ["postgres"]
+
