@@ -4,7 +4,8 @@ WORKDIR /tools
 COPY su-exec-master.zip /tools/
 # 安装依赖
 RUN yum -y install util-linux  dos2unix gcc make unzip wget\
-    && unzip su-exec-master.zip\
+    && wget https://github.com/ncopa/su-exec/archive/master.zip\
+    && unzip master.zip\
     && cd su-exec-master\
     && make\
     && cp su-exec /usr/local/bin/
