@@ -21,6 +21,7 @@ RUN dos2unix -k /usr/local/bin/update-pg-password.sh /usr/local/bin/docker-entry
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 RUN chmod +x /usr/local/bin/update-pg-password.sh
 RUN chmod +x /docker-entrypoint-initdb.d/10_eulixspace.sh
+
 ENTRYPOINT ["docker-entrypoint.sh"]
 
 STOPSIGNAL SIGINT
