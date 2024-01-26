@@ -34,4 +34,3 @@ STOPSIGNAL SIGINT
 
 EXPOSE 5432
 CMD ["postgres"]
-
