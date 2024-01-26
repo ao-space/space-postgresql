@@ -1,7 +1,6 @@
 FROM xfan1024/openeuler:23.03-light
 RUN mkdir /tools
 WORKDIR /tools
-COPY su-exec-master.zip /tools/
 # 安装依赖
 RUN yum -y install util-linux  dos2unix gcc make unzip wget\
     && wget https://github.com/ncopa/su-exec/archive/master.zip\
