@@ -325,7 +325,7 @@ _main() {
 
 			docker_setup_db
 			docker_process_init_files /docker-entrypoint-initdb.d/*
-
+                        sed -i "s/^#listen_addresses =.*$/listen_addresses = '*'/" "$PGDATA/postgresql.conf"
 			docker_temp_server_stop
 			unset PGPASSWORD
 
